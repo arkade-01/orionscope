@@ -22,6 +22,12 @@ export interface FaqItem {
   q: string;
   a: string;
 }
+export interface Testimonial {
+  src: string;
+  /** intrinsic dimensions — used for aspect-ratio so the rail lays out without shift */
+  w: number;
+  h: number;
+}
 
 export const services: Service[] = [
   {
@@ -113,6 +119,22 @@ export const outreach: OutreachItem[] = [
     title: "Verified outreach",
     body: "We reach out directly with a clear, no-obligation plan to help you claim what is yours.",
   },
+];
+
+export const testimonials: Testimonial[] = [
+  { src: "/assets/testimonials/testimonial-1.jpg", w: 590, h: 1280 },
+  { src: "/assets/testimonials/testimonial-2.jpg", w: 590, h: 1280 },
+  { src: "/assets/testimonials/testimonial-3.jpg", w: 590, h: 1280 },
+  { src: "/assets/testimonials/testimonial-4.jpg", w: 590, h: 1280 },
+  { src: "/assets/testimonials/testimonial-5.jpg", w: 590, h: 1280 },
+  { src: "/assets/testimonials/testimonial-6.jpg", w: 590, h: 1280 },
+  { src: "/assets/testimonials/testimonial-7.jpg", w: 1179, h: 1246 },
+  { src: "/assets/testimonials/testimonial-8.jpg", w: 590, h: 1280 },
+  { src: "/assets/testimonials/testimonial-9.jpg", w: 590, h: 1280 },
+  { src: "/assets/testimonials/testimonial-10.jpg", w: 988, h: 1280 },
+  { src: "/assets/testimonials/testimonial-11.jpg", w: 590, h: 1280 },
+  { src: "/assets/testimonials/testimonial-12.jpg", w: 590, h: 1280 },
+  { src: "/assets/testimonials/testimonial-13.jpg", w: 1152, h: 1280 },
 ];
 
 export const faqs: FaqItem[] = [

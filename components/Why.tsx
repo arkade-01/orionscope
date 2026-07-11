@@ -10,6 +10,7 @@ const CHECKS = [
 export function Why() {
   return (
     <section
+      className="sec-why"
       style={sx(
         "position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:80px 32px",
       )}
@@ -20,7 +21,7 @@ export function Why() {
           "border-radius:28px;overflow:hidden;border:1px solid rgba(255,255,255,.1);display:grid;grid-template-columns:1fr 1fr;background:linear-gradient(120deg,#0c0c0c,#161009)",
         )}
       >
-        <div style={sx("padding:64px 56px")}>
+        <div className="why-copy" style={sx("padding:64px 56px")}>
           <p
             style={sx(
               "font-size:13px;letter-spacing:.16em;color:#FCA900;font-weight:600;margin-bottom:20px",

@@ -20,6 +20,7 @@ export function Cta() {
       )}
     >
       <div
+        className="cta-panel"
         style={sx(
           "position:relative;border-radius:30px;overflow:hidden;border:1px solid rgba(252,169,0,.3);padding:72px 40px;text-align:center;background:radial-gradient(circle at 50% 0%,rgba(252,80,0,.22),transparent 60%),#0a0705",
         )}
@@ -50,6 +51,7 @@ export function Cta() {
           </p>
           <form
             onSubmit={onSubmit}
+            className="cta-form"
             style={sx(
               "display:flex;gap:12px;max-width:520px;margin:0 auto;flex-wrap:wrap;justify-content:center",
             )}

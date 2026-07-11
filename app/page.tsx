@@ -9,6 +9,7 @@ import { Process } from "@/components/Process";
 import { Outreach } from "@/components/Outreach";
 import { Why } from "@/components/Why";
 import { Results } from "@/components/Results";
+import { Testimonials } from "@/components/Testimonials";
 import { Cta } from "@/components/Cta";
 import { Faq } from "@/components/Faq";
 import { Footer } from "@/components/Footer";
@@ -26,6 +27,7 @@ export default function Page() {
       <Outreach />
       <Why />
       <Results />
+      <Testimonials />
       <Cta />
       <Faq />
       <Footer />

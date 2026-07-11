@@ -3,6 +3,7 @@ import { sx } from "@/lib/css";
 export function Problem() {
   return (
     <section
+      className="sec-problem"
       style={sx(
         "position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:100px 32px 40px;text-align:center",
       )}

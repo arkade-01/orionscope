@@ -7,3 +7,4 @@ next-env.d.ts
 .env*
 .DS_Store
 *.tsbuildinfo
+/design_handoff_orionscope_site

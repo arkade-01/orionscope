@@ -4,6 +4,7 @@ import { outreach } from "@/lib/data";
 export function Outreach() {
   return (
     <section
+      className="sec-outreach"
       style={sx(
         "position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:60px 32px",
       )}

@@ -94,6 +94,7 @@ export function Hero() {
           </span>
         </h1>
         <p
+          className="hero-sub"
           style={sx(
             "font-size:19px;line-height:1.6;color:#ffffffb0;max-width:520px;margin-bottom:40px",
           )}
@@ -105,6 +106,7 @@ export function Hero() {
           that&apos;s yours to claim.
         </p>
         <div
+          className="hero-btns"
           style={sx("display:flex;gap:16px;flex-wrap:wrap;margin-bottom:48px")}
         >
           <a
@@ -128,6 +130,7 @@ export function Hero() {
           {stats.map(([value, label], i) => (
             <div
               key={label}
+              className="hero-stat"
               style={sx("display:flex;gap:40px;align-items:flex-start")}
             >
               {i > 0 && (
@@ -139,6 +142,7 @@ export function Hero() {
               )}
               <div>
                 <div
+                  className="stat-fig"
                   style={sx(
                     "font-size:30px;font-weight:800;letter-spacing:-.02em",
                   )}
@@ -181,6 +185,7 @@ export function Hero() {
         </div>
         {/* floating scan card */}
         <div
+          className="scan-card"
           style={sx(
             "position:absolute;left:-34px;bottom:44px;z-index:2;width:290px;background:rgba(12,12,12,.86);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:18px;box-shadow:0 24px 60px rgba(0,0,0,.5);animation:os-float 6s ease-in-out infinite",
           )}

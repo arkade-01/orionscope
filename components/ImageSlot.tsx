@@ -7,7 +7,7 @@ import { Star } from "./icons";
 /**
  * Renders a real image if it loads, otherwise falls back to a styled
  * placeholder — mirrors the prototype's <image-slot> element. Drop the real
- * assets into /public/scraps/ to replace the placeholders.
+ * assets into /public/assets/ to replace the placeholders.
  */
 export function ImageSlot({
   src,
