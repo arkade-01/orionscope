@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { sx } from "@/lib/css";
-import { Star } from "./icons";
 
 export function Cta() {
   const [value, setValue] = useState("");
@@ -31,7 +30,11 @@ export function Cta() {
           )}
         />
         <div style={sx("position:relative")}>
-          <Star size={34} fill="#FCA900" style={sx("margin-bottom:24px")} />
+          <img
+            src="/assets/logo-icon-white.png"
+            alt="Orion Scope"
+            style={sx("width:34px;height:34px;object-fit:contain;margin-bottom:24px")}
+          />
           <h2
             style={sx(
               "font-size:48px;font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:18px",

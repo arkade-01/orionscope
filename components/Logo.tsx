@@ -1,7 +1,7 @@
 import { sx } from "@/lib/css";
-import { Star } from "./icons";
 
 export function Logo({ mark = 38, text = 20 }: { mark?: number; text?: number }) {
+  const icon = mark - 14;
   return (
     <span style={sx("display:flex;align-items:center;gap:12px")}>
       <span
@@ -9,7 +9,11 @@ export function Logo({ mark = 38, text = 20 }: { mark?: number; text?: number })
           `position:relative;width:${mark}px;height:${mark}px;border-radius:50%;background:linear-gradient(150deg,#FCA900,#FC5000);display:flex;align-items:center;justify-content:center;flex:none`,
         )}
       >
-        <Star size={Math.round(mark / 2)} fill="#060606" />
+        <img
+          src="/assets/logo-icon-white.png"
+          alt="Orion Scope"
+          style={{ width: icon, height: icon, objectFit: "contain" }}
+        />
       </span>
       <span
         style={sx(
