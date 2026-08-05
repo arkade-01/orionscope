@@ -26,6 +26,7 @@ export interface Testimonial {
   quote: string;
   name: string;
   role: string;
+  avatar: string;
 }
 
 export const services: Service[] = [
@@ -126,36 +127,42 @@ export const testimonials: Testimonial[] = [
       "Good dude, he is finding people who have unclaimed BONK and trying to let them know. He went through me yesterday to get in contact with a lad who had like 2.7 billion vested BONK he had no idea existed.",
     name: "Case (@case_fud)",
     role: "2.7B vested BONK surfaced for a friend",
+    avatar: "/assets/testimonials/pfp/case-fud.jpg",
   },
   {
     quote:
       "Okay bro nws I respect the hustle, I knew about it just never bothered.",
     name: "Aydan",
     role: "Alerted to ~$2,500 in unclaimed $W",
+    avatar: "/assets/testimonials/pfp/aydan.jpg",
   },
   {
     quote:
       "It actually worked! It took some time not trying to get scammed. Well thanks! I'll send you 30% of what I claimed now, what's your wallet?",
     name: "SolanaBacker.sol",
     role: "Claimed an airdrop we surfaced",
+    avatar: "/assets/testimonials/pfp/solanabacker.jpg",
   },
   {
     quote:
       "Thanks for pushing me to claim them. If you see any more feel free to let me know.",
     name: "JamesCarnley.eth",
     role: "Claimed airdrops flagged by our outreach",
+    avatar: "/assets/testimonials/pfp/jamescarnley.jpg",
   },
   {
     quote:
       "Oh woah… thank you so much!! I'm going to get this claimed but gotta talk to lawyers.",
     name: "512mace",
     role: "A find big enough to involve lawyers",
+    avatar: "/assets/testimonials/pfp/512mace.jpg",
   },
   {
     quote:
       "Hey. Ur dms were hidden. Appreciate the heads up. What's ur addy? Want to send a thnx.",
     name: "aaronv.eth",
     role: "Offered a tip after our heads-up",
+    avatar: "/assets/testimonials/pfp/aaronv-eth.jpg",
   },
 ];
 

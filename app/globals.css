@@ -100,7 +100,8 @@ input:focus{border-color:rgba(252,169,0,.5)!important}
   #start{margin:24px 20px 0!important;padding:0 20px!important}
   .cta-panel{padding:48px 22px!important}
   #start h2{font-size:30px!important}
-  .cta-form{flex-direction:column!important}
+  .cta-fields{flex-direction:column!important}
+  .cta-fields input{min-width:0!important}
 
   /* faq */
   #faq{padding:56px 20px 30px!important}

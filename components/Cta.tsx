@@ -3,12 +3,24 @@
 import { useState } from "react";
 import { sx } from "@/lib/css";
 
+const RECOVER_EMAIL = "recover@orionscope.io";
+
 export function Cta() {
-  const [value, setValue] = useState("");
+  const [wallet, setWallet] = useState("");
+  const [email, setEmail] = useState("");
+  const [handle, setHandle] = useState("");
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("Thanks — our team will reach out within 48 hours.");
+    const body = [
+      wallet && `Wallet address: ${wallet}`,
+      email && `Email: ${email}`,
+      handle && `X handle: ${handle}`,
+    ]
+      .filter(Boolean)
+      .join("\n");
+    const subject = encodeURIComponent("New recovery case submission");
+    window.location.href = `mailto:${RECOVER_EMAIL}?subject=${subject}&body=${encodeURIComponent(body)}`;
   };
 
   return (
@@ -46,31 +58,51 @@ export function Cta() {
           </h2>
           <p
             style={sx(
-              "font-size:18px;color:#ffffffb0;max-width:520px;margin:0 auto 36px",
+              "font-size:18px;color:#ffffffb0;max-width:560px;margin:0 auto 36px",
             )}
           >
-            Share a wallet address or the story of what went missing. The first
-            scan is free and takes 48 hours.
+            Share a wallet address, email, or X handle — whatever&apos;s
+            easiest. The first scan is free and takes 48 hours.
           </p>
           <form
             onSubmit={onSubmit}
             className="cta-form"
-            style={sx(
-              "display:flex;gap:12px;max-width:520px;margin:0 auto;flex-wrap:wrap;justify-content:center",
-            )}
+            style={sx("display:flex;flex-direction:column;gap:16px;max-width:640px;margin:0 auto")}
           >
-            <input
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-              placeholder="Wallet address or email"
-              style={sx(
-                "flex:1;min-width:240px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:16px 22px;color:#fff;font-size:15px;font-family:inherit;outline:none",
-              )}
-            />
+            <div
+              className="cta-fields"
+              style={sx("display:flex;gap:12px;flex-wrap:wrap")}
+            >
+              <input
+                value={wallet}
+                onChange={(e) => setWallet(e.target.value)}
+                placeholder="Wallet address"
+                style={sx(
+                  "flex:1;min-width:160px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:16px 22px;color:#fff;font-size:15px;font-family:inherit;outline:none",
+                )}
+              />
+              <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+                type="email"
+                style={sx(
+                  "flex:1;min-width:160px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:16px 22px;color:#fff;font-size:15px;font-family:inherit;outline:none",
+                )}
+              />
+              <input
+                value={handle}
+                onChange={(e) => setHandle(e.target.value)}
+                placeholder="X handle"
+                style={sx(
+                  "flex:1;min-width:160px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:16px 22px;color:#fff;font-size:15px;font-family:inherit;outline:none",
+                )}
+              />
+            </div>
             <button
               type="submit"
               style={sx(
-                "background:linear-gradient(135deg,#FCA900,#FC5000);color:#060606;font-weight:700;font-size:15px;padding:16px 30px;border-radius:999px;border:none;cursor:pointer;font-family:inherit",
+                "align-self:center;background:linear-gradient(135deg,#FCA900,#FC5000);color:#060606;font-weight:700;font-size:15px;padding:16px 30px;border-radius:999px;border:none;cursor:pointer;font-family:inherit",
               )}
             >
               Start free scan

@@ -82,15 +82,15 @@ export function Hero() {
             "font-size:68px;line-height:1.02;font-weight:800;letter-spacing:-.03em;margin-bottom:24px",
           )}
         >
-          Recover what the
+          Recover what you
           <br />
-          chain{" "}
+          forgot{" "}
           <span
             style={sx(
               "font-style:italic;background:linear-gradient(135deg,#FCA900,#FC5000);-webkit-background-clip:text;background-clip:text;color:transparent",
             )}
           >
-            forgot.
+            onchain.
           </span>
         </h1>
         <p
@@ -100,8 +100,8 @@ export function Hero() {
           )}
         >
           Orion Scope is an onchain research team that helps people and teams
-          trace, reclaim, and recover lost or forgotten funds — from misplaced
-          seed phrases to stranded bridge transfers and unclaimed airdrops. We
+          trace, reclaim, and recover lost or forgotten funds — from 
+           stranded bridge transfers and unclaimed airdrops. We
           also research the chain proactively and reach out when we find value
           that&apos;s yours to claim.
         </p>

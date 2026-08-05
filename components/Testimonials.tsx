@@ -50,11 +50,24 @@ export function Testimonials() {
             >
               &ldquo;{t.quote}&rdquo;
             </p>
-            <div style={sx("font-size:13.5px;font-weight:700;color:#fff")}>
-              {t.name}
-            </div>
-            <div style={sx("font-size:12px;color:#FCD07a;margin-top:2px")}>
-              {t.role}
+            <div style={sx("display:flex;align-items:center;gap:12px")}>
+              <img
+                src={t.avatar}
+                alt={t.name}
+                width={40}
+                height={40}
+                style={sx(
+                  "width:40px;height:40px;border-radius:50%;object-fit:cover;flex:none;border:1px solid rgba(255,255,255,.14)",
+                )}
+              />
+              <div>
+                <div style={sx("font-size:13.5px;font-weight:700;color:#fff")}>
+                  {t.name}
+                </div>
+                <div style={sx("font-size:12px;color:#FCD07a;margin-top:2px")}>
+                  {t.role}
+                </div>
+              </div>
             </div>
           </div>
         ))}
