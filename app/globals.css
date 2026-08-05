@@ -38,6 +38,8 @@ a{text-decoration:none;color:inherit}
 .faq-item{transition:border-color .2s}
 .faq-item:hover{border-color:rgba(255,255,255,.22)}
 input:focus{border-color:rgba(252,169,0,.5)!important}
+.contact-icon{transition:border-color .2s,color .2s}
+.contact-icon:hover{border-color:rgba(252,169,0,.45);color:#FCA900}
 
 /* single 760px breakpoint per the design handoff — overrides the inline
    desktop values, hence the !important throughout */
