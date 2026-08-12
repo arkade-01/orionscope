@@ -43,7 +43,7 @@ export function Cta() {
         />
         <div style={sx("position:relative")}>
           <img
-            src="/assets/logo-icon-white.png"
+            src="/assets/logo-mark.png"
             alt="Orion Scope"
             style={sx("width:34px;height:34px;object-fit:contain;margin-bottom:24px")}
           />
