@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@orionscope/engine": "file:../orionagent",
+    "@orionscope/engine": "github:arkade-01/orionagent#feat/agent-surfaces",
     "@tanstack/react-query": "^5.102.0",
     "next": "^15.5.20",
     "react": "19.0.0",
