@@ -5,6 +5,7 @@ import { sx } from "@/lib/css";
 import { Logo } from "./Logo";
 
 const LINKS = [
+  { href: "/scan", label: "Scan" },
   { href: "#services", label: "Services" },
   { href: "#process", label: "How it works" },
   { href: "#results", label: "Results" },
