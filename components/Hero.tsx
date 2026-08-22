@@ -110,7 +110,7 @@ export function Hero() {
           style={sx("display:flex;gap:16px;flex-wrap:wrap;margin-bottom:48px")}
         >
           <a
-            href="#start"
+            href="/scan"
             style={sx(
               "background:linear-gradient(135deg,#FCA900,#FC5000);color:#060606;font-weight:700;font-size:16px;padding:17px 32px;border-radius:999px;box-shadow:0 12px 40px rgba(252,80,0,.35)",
             )}
