@@ -44,6 +44,9 @@ export function ScanForm() {
   const [steps, setSteps] = useState<Step[]>([]);
   const [progress, setProgress] = useState<Progress | undefined>();
   const [brief, setBrief] = useState<BriefData | undefined>();
+  // A long stretch without a progress event is normal on a full scan; a page
+  // that looks frozen during it is not.
+  const [stalledFor, setStalledFor] = useState(0);
 
   const alsoList = also
     .split(/[\s,]+/)
@@ -98,6 +101,12 @@ export function ScanForm() {
             continue;
           }
 
+          if (event.type === "heartbeat") {
+            setStalledFor((n) => n + 5);
+            continue;
+          }
+          setStalledFor(0);
+
           switch (event.type) {
             case "step":
               if (event.source && event.status) {
@@ -150,6 +159,7 @@ export function ScanForm() {
     setSteps([]);
     setProgress(undefined);
     setBrief(undefined);
+    setStalledFor(0);
     await runScan(address.trim());
   }
 
