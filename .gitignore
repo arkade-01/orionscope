@@ -9,3 +9,8 @@ next-env.d.ts
 *.tsbuildinfo
 /design_handoff_orionscope_site
 .vercel
+
+# Credential files. `.env*` misses names without a leading dot —
+# an env.vercel with a live API key reached a public repo that way.
+env*
+*.env
