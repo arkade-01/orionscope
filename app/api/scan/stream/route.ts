@@ -80,12 +80,25 @@ export async function POST(request: Request) {
   const stream = new ReadableStream({
     async start(controller) {
       const send = (obj: unknown) => {
+        lastSentAt = Date.now();
         try {
           controller.enqueue(encoder.encode(`${JSON.stringify(obj)}\n`));
         } catch {
           // Client disconnected; the scan finishes and its result is dropped.
         }
       };
+
+      /**
+       * A silent stream is indistinguishable from a hung one, to a proxy and to
+       * a person. Long stretches of real work can pass without a progress event
+       * — a single oversized block range fans out into many requests and only
+       * reports once every piece lands — so a heartbeat keeps the connection
+       * warm and lets the page say it is still alive.
+       */
+      let lastSentAt = Date.now();
+      const heartbeat = setInterval(() => {
+        if (Date.now() - lastSentAt > 5000) send({ type: "heartbeat" });
+      }, 5000);
 
       try {
         const client = createBaseClient(rpcUrl);
@@ -129,6 +142,7 @@ export async function POST(request: Request) {
             "to claim.",
         });
       } finally {
+        clearInterval(heartbeat);
         controller.close();
       }
     },
