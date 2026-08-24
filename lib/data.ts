@@ -29,6 +29,26 @@ export interface Testimonial {
   avatar: string;
 }
 
+/**
+ * The headline figures.
+ *
+ * Each was previously written twice in Hero.tsx — once as the seed value and
+ * again as the count-up target — so changing one and missing the other made a
+ * counter start at the old number and animate to the new one.
+ */
+export interface HeroStat {
+  /** The real value. Formatting happens at render. */
+  value: number;
+  label: string;
+  format: "usdMillions" | "count" | "percent";
+}
+
+export const heroStats: HeroStat[] = [
+  { value: 62_400_000, label: "Assets recovered", format: "usdMillions" },
+  { value: 8_420, label: "Wallets investigated", format: "count" },
+  { value: 91, label: "Recovery rate", format: "percent" },
+];
+
 export const services: Service[] = [
   {
     icon: "🔑",

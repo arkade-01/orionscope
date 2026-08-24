@@ -2,48 +2,41 @@
 
 import { useEffect, useState } from "react";
 import { sx } from "@/lib/css";
+import { heroStats, type HeroStat } from "@/lib/data";
 import { ImageSlot } from "./ImageSlot";
 
-export function Hero() {
-  const money = (v: number) => "$" + (v / 1e6).toFixed(1) + "M";
-  const count = (v: number) => v.toLocaleString();
-  const pct = (v: number) => v + "%";
+const FORMAT: Record<HeroStat["format"], (v: number) => string> = {
+  usdMillions: (v) => "$" + (v / 1e6).toFixed(1) + "M",
+  count: (v) => v.toLocaleString(),
+  percent: (v) => v + "%",
+};
 
-  // Seed with the FINAL values so they never render as 0 when JS is absent or
-  // motion is reduced (per the design handoff spec).
-  const [recovered, setRecovered] = useState(() => money(62_400_000));
-  const [wallets, setWallets] = useState(() => count(8420));
-  const [success, setSuccess] = useState(() => pct(91));
+export function Hero() {
+  // Seeded with the FINAL values so they never render as 0 when JS is absent or
+  // motion is reduced (per the design handoff spec). The figures themselves
+  // live in lib/data.ts — one place per number, so editing one cannot leave a
+  // counter animating towards a different value than it started at.
+  const [shown, setShown] = useState<string[]>(() =>
+    heroStats.map((s) => FORMAT[s.format](s.value)),
+  );
 
   useEffect(() => {
     if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
 
-    const run = (
-      to: number,
-      dur: number,
-      fmt: (v: number) => string,
-      set: (s: string) => void,
-    ) => {
-      const start = performance.now();
-      const tick = (now: number) => {
-        const p = Math.min(1, (now - start) / dur);
-        const e = 1 - Math.pow(1 - p, 3);
-        set(fmt(Math.round(to * e)));
-        if (p < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
+    const start = performance.now();
+    const tick = (now: number) => {
+      const p = Math.min(1, (now - start) / 1400);
+      const e = 1 - Math.pow(1 - p, 3);
+      setShown(heroStats.map((s) => FORMAT[s.format](Math.round(s.value * e))));
+      if (p < 1) requestAnimationFrame(tick);
     };
-    run(62_400_000, 1400, money, setRecovered);
-    run(8420, 1400, count, setWallets);
-    run(91, 1400, pct, setSuccess);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    requestAnimationFrame(tick);
   }, []);
 
-  const stats: [string, string][] = [
-    [recovered, "Assets recovered"],
-    [wallets, "Wallets investigated"],
-    [success, "Recovery rate"],
-  ];
+  const stats: [string, string][] = heroStats.map((s, i) => [
+    shown[i] ?? FORMAT[s.format](s.value),
+    s.label,
+  ]);
 
   return (
     <section

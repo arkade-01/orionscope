@@ -81,7 +81,41 @@ const CARD =
   "background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:20px 22px";
 const MONO = "font-family:var(--font-mono),ui-monospace,monospace";
 
-function Group({ title, hint, items }: { title: string; hint: string; items: WireItem[] }) {
+/** 0x1234…abcd — enough to tell two tokens apart at a glance. */
+function shortAddress(a: string): string {
+  return `${a.slice(0, 6)}…${a.slice(-4)}`;
+}
+
+/**
+ * Token symbols are chosen by whoever deployed the token, so they collide. One
+ * real wallet came back with two tokens called "ikaros" and another two called
+ * "CLAWSTR"/"Clawstr" at four different addresses — nine rows, four of which
+ * read as duplicates of each other. Where a symbol repeats, the address is the
+ * only thing that distinguishes them, so it gets shown.
+ */
+function collidingSymbols(items: { token: { symbol: string | null; address: string } }[]): Set<string> {
+  const bySymbol = new Map<string, Set<string>>();
+  for (const i of items) {
+    const key = (i.token.symbol ?? "").toLowerCase();
+    if (!key) continue;
+    const addresses = bySymbol.get(key) ?? new Set<string>();
+    addresses.add(i.token.address.toLowerCase());
+    bySymbol.set(key, addresses);
+  }
+  return new Set([...bySymbol].filter(([, a]) => a.size > 1).map(([sym]) => sym));
+}
+
+function Group({
+  title,
+  hint,
+  items,
+  ambiguous,
+}: {
+  title: string;
+  hint: string;
+  items: WireItem[];
+  ambiguous: Set<string>;
+}) {
   if (items.length === 0) return null;
   return (
     <div style={sx("margin-bottom:28px")}>
@@ -91,14 +125,15 @@ function Group({ title, hint, items }: { title: string; hint: string; items: Wir
       </div>
       <div style={sx("display:flex;flex-direction:column;gap:12px")}>
         {items.map((item) => (
-          <ItemRow key={item.id} item={item} />
+          <ItemRow key={item.id} item={item} ambiguous={ambiguous} />
         ))}
       </div>
     </div>
   );
 }
 
-function ItemRow({ item }: { item: WireItem }) {
+function ItemRow({ item, ambiguous }: { item: WireItem; ambiguous: Set<string> }) {
+  const needsAddress = ambiguous.has((item.token.symbol ?? "").toLowerCase());
   const [open, setOpen] = useState(false);
   return (
     <div className="os-card" style={sx(CARD)}>
@@ -107,6 +142,12 @@ function ItemRow({ item }: { item: WireItem }) {
           <div style={sx(`${MONO};font-size:16px;font-weight:600;word-break:break-all`)}>
             {formatAmount(item.rawAmount, item.token.decimals)}{" "}
             <span style={sx("color:#FCA900")}>{item.token.symbol ?? "token"}</span>
+            {(needsAddress || !item.token.symbol) && (
+              <span style={sx("color:#ffffff70;font-weight:400;font-size:13px")}>
+                {" "}
+                {shortAddress(item.token.address)}
+              </span>
+            )}
           </div>
           <div style={sx("font-size:13px;color:#ffffff90;margin-top:6px")}>{item.label}</div>
         </div>
@@ -156,6 +197,7 @@ function ItemRow({ item }: { item: WireItem }) {
 export function ScanReportView({ report }: { report: WireReport }) {
   const auto = report.items.filter((i) => i.claimType === "permissionless");
   const sign = report.items.filter((i) => i.claimType === "owner-sign");
+  const ambiguous = collidingSymbols(report.items);
   const nothingClaimable = report.items.length === 0;
 
   return (
@@ -194,12 +236,21 @@ export function ScanReportView({ report }: { report: WireReport }) {
         title="Auto-claimable now"
         hint="anyone can submit these; the funds still go to you"
         items={auto}
+        ambiguous={ambiguous}
       />
       <Group
         title="Needs your signature"
         hint="only you can authorise these"
         items={sign}
+        ambiguous={ambiguous}
       />
+
+      {ambiguous.size > 0 && (
+        <p style={sx("font-size:13px;color:#ffffff80;margin:-14px 0 28px")}>
+          Some tokens share a name — anyone can call a token anything. Addresses are shown where
+          that happens, so identical-looking rows are different tokens, not duplicates.
+        </p>
+      )}
 
       {report.unreachable.length > 0 && (
         <div style={sx("margin-bottom:28px")}>
