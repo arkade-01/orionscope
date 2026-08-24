@@ -20,6 +20,14 @@ export function Results() {
         <h2 style={sx("font-size:42px;font-weight:800;letter-spacing:-.03em")}>
           Cases that came back from the dark.
         </h2>
+        <p
+          style={sx(
+            "font-size:17px;color:#ffffffb0;max-width:620px;margin-top:18px;line-height:1.6",
+          )}
+        >
+          Most wallets are holding a few hundred dollars. Some are holding six figures. You
+          don&apos;t know which one you are until someone looks.
+        </p>
       </div>
       <div
         className="grid-3"

@@ -46,7 +46,7 @@ export interface HeroStat {
 export const heroStats: HeroStat[] = [
   { value: 5_400_000, label: "Assets recovered", format: "usdMillions" },
   { value: 8_420, label: "Wallets investigated", format: "count" },
-  { value: 91, label: "Recovery rate", format: "percent" },
+  { value: 1_000_000, label: "Largest single recovery", format: "usdMillions" },
 ];
 
 export const services: Service[] = [
