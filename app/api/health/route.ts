@@ -22,10 +22,37 @@ function rpcHost(): string | null {
   }
 }
 
+/**
+ * Presence is not health. A configured but rejected key reported `ok: true`
+ * here while every scan hung for two minutes retrying a 401 — so this actually
+ * calls the RPC and reports what came back.
+ */
+async function rpcReachable(): Promise<{ reachable: boolean; detail: string | null }> {
+  const url = process.env.BASE_RPC_URL;
+  if (!url) return { reachable: false, detail: "BASE_RPC_URL is not set" };
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "eth_blockNumber", params: [] }),
+      signal: AbortSignal.timeout(8000),
+    });
+    const body = (await res.json()) as { result?: string; error?: { message?: string } };
+    if (body.error) return { reachable: false, detail: body.error.message ?? "RPC returned an error" };
+    if (!body.result) return { reachable: false, detail: `RPC replied ${res.status} with no result` };
+    return { reachable: true, detail: `block ${parseInt(body.result, 16)}` };
+  } catch (err) {
+    return { reachable: false, detail: (err as Error).message ?? "could not reach the RPC" };
+  }
+}
+
 export async function GET() {
+  const rpc = await rpcReachable();
   return Response.json(
     {
-      ok: Boolean(process.env.BASE_RPC_URL),
+      // True only when the chain actually answered.
+      ok: rpc.reachable,
+      rpc,
       env: {
         BASE_RPC_URL: Boolean(process.env.BASE_RPC_URL),
         ORIONSCOPE_ALLOW_DEEP: process.env.ORIONSCOPE_ALLOW_DEEP ?? null,
