@@ -4,6 +4,7 @@ import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { TrustStrip } from "@/components/TrustStrip";
 import { Problem } from "@/components/Problem";
+import { Scanner } from "@/components/Scanner";
 import { Services } from "@/components/Services";
 import { Process } from "@/components/Process";
 import { Outreach } from "@/components/Outreach";
@@ -22,6 +23,7 @@ export default function Page() {
       <Hero />
       <TrustStrip />
       <Problem />
+      <Scanner />
       <Services />
       <Process />
       <Outreach />
