@@ -44,7 +44,7 @@ export interface HeroStat {
 }
 
 export const heroStats: HeroStat[] = [
-  { value: 62_400_000, label: "Assets recovered", format: "usdMillions" },
+  { value: 5_400_000, label: "Assets recovered", format: "usdMillions" },
   { value: 8_420, label: "Wallets investigated", format: "count" },
   { value: 91, label: "Recovery rate", format: "percent" },
 ];
@@ -107,19 +107,19 @@ export const steps: Step[] = [
 
 export const cases: CaseStudy[] = [
   {
-    tag: "FORGOTTEN AIRDROP",
-    amount: "$127K",
-    body: "Three years of unclaimed governance tokens across four protocols, surfaced from a dormant 2021 wallet.",
+    tag: "FORGOTTEN AIRDROPS",
+    amount: "$2M",
+    body: "Governance and incentive allocations that went unclaimed — often for years, often by holders who never knew they qualified.",
   },
   {
-    tag: "BRIDGE FAILURE",
-    amount: "$48.2K",
-    body: "A stablecoin transfer stranded by a defunct bridge relayer, traced and released to the original owner.",
+    tag: "TOKENS THAT APPRECIATED",
+    amount: "$1.5M",
+    body: "Balances written off as worthless when they were received, surfaced back to their owners after the market disagreed.",
   },
   {
-    tag: "LOST KEYSTORE",
-    amount: "$310K",
-    body: "A partial seed phrase and an old encrypted file — reconstructed into full access after six weeks of work.",
+    tag: "SUNSETTED PROTOCOLS",
+    amount: "$1.9M",
+    body: "Funds left behind in protocols that shut down, wound back, or quietly stopped maintaining a front-end to withdraw from.",
   },
 ];
 
